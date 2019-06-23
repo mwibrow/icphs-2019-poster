@@ -1,0 +1,20 @@
+# OS specifc files
+.DS_Store
+Icon?
+Thumbs.db
+
+# Build files
+build/
+color_profiles/
+
+# IPython / Jupyter stuff
+.ipynb_checkpoints/
+*.ipynb
+
+# Data for now
+/data/
+/src/data/
+
+src/plots/images/*.png
+src/images/CALVin-screenshots/jpgs/
+poster.pdf
