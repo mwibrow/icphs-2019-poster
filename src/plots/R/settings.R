@@ -1,8 +1,8 @@
-list.of.packages <- c("ggplot2", "showtext", "reshape2", "plyr", "stringr")
+list.of.packages <- c("ggplot2", "showtext", "reshape2", "plyr", "stringr", "R.devices")
 
 ensure.packages <- function(packages=list.of.packages) {
   new.packages <- packages[!(packages %in% installed.packages()[,"Package"])]
-  if(length(new.packages)) install.packages(new.packages)
+  if(length(new.packages)) install.packages(new.packages, repos='http://cran.us.r-project.org')
   for (package in packages) {
     library(package, character.only=TRUE)
   }
@@ -101,6 +101,8 @@ with(colors, {
   ssbe.label <- "#cccccc"
   panel.background <- "#eeeeee"
   panel.grid <- "#ffffff"
+  median <- "#ffffff"
+  ipa <- "#176FC1"
 })
 
 
@@ -112,4 +114,5 @@ DPI <- as.numeric(Sys.getenv("DPI"))
 if (is.na(DPI)) {
   DPI <- 300
 }
+
 cat(sprintf("Using %d dpi\n", DPI))

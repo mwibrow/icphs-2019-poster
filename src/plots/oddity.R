@@ -1,9 +1,9 @@
 source(file.path("R", "settings.R"))
 
 
-vid.df = read.csv(file.path(dataDir, "VID.csv"))
+odd.df = read.csv(file.path(dataDir, "oddity.csv"))
 
-bx.df = ddply(vid.df, c("Group", "Test", "Participant"), function(subset) {
+bx.df = ddply(odd.df, c("Group", "Test", "participant"), function(subset) {
     nTrials = sum(subset$nTrials)
     nCorrect = sum(subset$nCorrect)
     Accuracy = nCorrect / nTrials * 100
@@ -13,10 +13,6 @@ bx.df = ddply(vid.df, c("Group", "Test", "Participant"), function(subset) {
 bx.df$Group = factor(bx.df$Group, levels=c("LV", "HV"))
 bx.df$Test = factor(bx.df$Test, levels=c("pre", "post"))
 
-POST <- "#F8BBD0"
-PRE <- "#E91E63"
-MD <- "#FCE4EC"
-IPA <- "#176FC1"
 
 
 dodge <- position_dodge(0.875)
@@ -100,10 +96,8 @@ p <- p + theme(
 suppressGraphics(ggsave(
   file.path(
     outDir,
-    "vid-boxplot.png"),
+    "oddity-boxplot.png"),
   width=width,
   height=height,
   units="in",
-  dpi=DPI));
-
-
+  dpi=DPI))

@@ -80,11 +80,6 @@ lob.mn.df <- ddply(lob.df, c("group", "test", "vowel"), function(subset) {
 
 # Do plot
 
-# Set up fonts
-font_add("Cabin", "../fonts/Cabin/Cabin-Regular.ttf")
-font_add("DejaVuSans", "../fonts/dejavu-fonts-ttf-2.37/ttf/DejaVuSans.ttf")
-showtext_auto()
-
 
 df.melt <- melt(lob.mn.df,  id.var = c("vowel", "group", "test"))
 df <- dcast(df.melt, group+vowel~variable+test)
@@ -204,25 +199,9 @@ ssbe.lab.df <- label.transform(
   transforms=transforms.ssbe,
   default=list(angle=90, r=0.22))
 
-# Define colors
-colors <- {}
-colors <- new.env()
-with(colors, {
-  pre <-  "#F8BBD0"
-  post <- "#E91E63"
-  arrow <- "#444444"
-  ipa <- "#176FC1" # "#0288D1"
-  ssbe <- "#cccccc"
-  ssbe.label <- "#cccccc"
-  panel.background <- "#eeeeee"
-  panel.grid <- "#ffffff"
-})
-
-dpi <- DPI
 
 
-
-showtext_opts(dpi=dpi)
+showtext_opts(dpi=DPI)
 fontSize <- 12
 width = 6.25
 height = 3
@@ -307,6 +286,7 @@ p <- p +  xlab("F2 (Lobanov)")
 p <- p + facet_grid(.~group)
 
 options(repr.plot.width=width, repr.plot.height=height)
-ggsave(file.path(outDir, "vowel-plot.png"), width=width, height=height, units="in", dpi=dpi)
+suppressGraphics(
+  ggsave(file.path(outDir, "vowel-plot.png"), width=width, height=height, units="in", dpi=DPI))
 
 
