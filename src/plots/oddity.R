@@ -18,7 +18,7 @@ bx.df$Test = factor(bx.df$Test, levels=c("pre", "post"))
 dodge <- position_dodge(0.875)
 
 width <- 3.75
-height <- 3.5
+height <- 3.25
 
 
 

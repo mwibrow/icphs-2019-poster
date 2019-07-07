@@ -2,6 +2,7 @@
 \RequirePackage{luatex85}
 \documentclass[final,xcolor={cmyk,hyperref}]{beamer}
 \usepackage[orientation=portrait, size=a0, scale=1.26]{beamerposter}
+\usepackage[utf8]{inputenc}
 \usepackage{pdfrender}
 \usepackage{ifthen}
 \usepackage[pdf15,x-1a1]{pdfx}
@@ -66,6 +67,9 @@ Mark Wibrow\texorpdfstring{\,\textsuperscript{3} \and}{}}
     \hskip.125ex%
     \textcolor{Purple500}{in}%
   }}}
+
+\def\chisq{\begingroup\DejaVuSans\char"03C7\endgroup\textsuperscript{2}}
+\def\textem#1{\emph{#1}}
 \begin{document}
 
 \begin{frame}[t]
@@ -202,11 +206,19 @@ Mark Wibrow\texorpdfstring{\,\textsuperscript{3} \and}{}}
   {\fontsize{128pt}{144pt}\CALVin} \\[0.75ex]
   {\Large\BubblegumSans Computer Assisted Learning for Vowels interface}
 \end{center}
-\begin{itemize}
-  \item
-  Contrast \emph{Low variability} (\textbf{LV} - 1 speaker) and \emph{High variability} (\textbf{HV} - 4 speakers)
-\end{itemize}
-\vspace*{0.25in}
+
+\vspace*{0.5in}
+
+\begin{tabular}{ccc}
+  \large Low variability (\textbf{LV}) &vs& \large High variability (\textbf{HV})
+\\[0.125in]
+1 speaker + the instructor
+&&
+4 speakers  + the instructor
+\end{tabular}
+
+\vspace*{0.5in}
+
 \def\screenshotwidth{0.24\linewidth}
 \begin{columns}
   \begin{column}{\screenshotwidth}
@@ -272,23 +284,40 @@ Mark Wibrow\texorpdfstring{\,\textsuperscript{3} \and}{}}
 \end{tikzfigure}
 \end{figure}
 %
-\vspace*{-0.25in}
 %
-
-\hfill
 
 
 
 \paragraph{Perception (category discrimination)}
 
-% \begin{itemize}
-%   \item No significant improvement in category discrimination
-%   for LV or HV participants between pre-tests and post-tests --- figure \tikzfigureref{axb-plot}
-%   \item This replicates previous results \cite{alshangiti_2015, hattori_2009}, where
-%   production training did not improve perception
+\begin{itemize}
+\item
+A linear mixed-effects logistic regression model showed a significant effect of training:
+\chisq (1) = 9.122, p < .05 --- see figure \tikzfigureref{oddity-boxplot}
+\item
+No significant difference between training groups, but a significant
+interaction between training group and test:
+\chisq (1) = 4.667, p < .05
+\item
+LV group performed slightly better at the post test than the HV group:
+b = -0.1998, SE = 0.0924, z = 2.161, p < .05
+\end{itemize}
+\paragraph{Production (vowel intelligibility)}
 
-% \end{itemize}
+\begin{itemize}
+  \item
+    Significant change in vowel production accuracy from pre-to post-test,
+    \chisq (1) = 16.762, p < .001 --- see figure \tikzfigureref{vid-boxplot}
+  \item
+    Significant effect of training group,
+    \chisq(1) = 7.65, p < .01
+  \item
+    Planned contrasts showed that the LV group performed slightly better than the HV group,
+    b=0.374, SE=0.141, z=2.645, p<.01
+\end{itemize}
+  \end{block}
 
+  \vspace*{-0.125in}
 \paragraph{Production (imitation task)}
 
 \def\op{\hskip0.2ex}
@@ -297,11 +326,8 @@ Mark Wibrow\texorpdfstring{\,\textsuperscript{3} \and}{}}
 between pre-tests and post-tests.
 Vowels centres --- SSBE vowels from \citep{hawkins_midgely_2005} ---
 shown in figure \tikzfigureref{vowel-plot}
-% \item
-% Classification according to an SSBE Mahalanobis-distance model
-% (based on data from \citep{hawkins_midgely_2005})
-% suggests an improvement for LV speakers between pre-tests and post-tests,
-% although this just fails to reach significance (p\op=\op0.0528) --- figure \tikzfigureref{mahalanobis-plot}
+\item
+Linear mixed models showed no significant change in F1 or F2 values from pre to post-test
 
 % \item
 %  Monophthong duration
@@ -310,24 +336,30 @@ shown in figure \tikzfigureref{vowel-plot}
 %  --- see figure \tikzfigureref{duration-plot}
 
 \end{itemize}
-  \end{block}
 
 
 
+
+\vspace*{0.25in}
 
 
 \begin{block}{Conclusions}
 
 \begin{itemize}
-  \item Perception results were in line with previous research \cite{alshangiti_2015,hattori_2009}
-
-  \item Production results were disappointing,
-  but may be due to the task demands (learning 18 vowels in 5 sessions),
-  and the use of group training sessions
+  \item
+    Children improved in both their vowel perception and production (albeit subtly)
+  \item
+    LV training group showed slightly better performance after only 5 training sessions
+  \item
+    LVPT seems to be more beneficial for children in learning new articulatory targets \cite{evans_martin-alverez_2016}
+  \item
+    Inspection of the acoustic analysis suggests that children were able to generalize
+    their learning in production to new stimuli in the imitation task
+    (F2 values approached native-like realizations for some vowels:
+    \ipa{/ɜː/}, \ipa{/ɑː/}, \ipa{/ʊ/}, \ipa{/eə/}, \ipa{/ɪə/})
 
   \item
-  Future research may focus on a smaller subset of vowels
-  and use exclusive one-to-one training sessions for children
+    Future research may focus on smaller subsets of vowels and  one-to-one training
 \end{itemize}
 \end{block}
 

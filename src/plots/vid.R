@@ -22,7 +22,7 @@ IPA <- "#176FC1"
 dodge <- position_dodge(0.875)
 
 width <- 3.75
-height <- 3.5
+height <- 3.25
 
 
 
