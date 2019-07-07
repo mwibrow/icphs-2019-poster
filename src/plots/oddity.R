@@ -18,7 +18,7 @@ bx.df$Test = factor(bx.df$Test, levels=c("pre", "post"))
 dodge <- position_dodge(0.875)
 
 width <- 3.75
-height <- 3
+height <- 3.5
 
 
 
@@ -68,7 +68,9 @@ p <- p + geom_segment(
   inherit.aes=FALSE,
   colour=colors$median)
 
+p <- p + ggtitle('Category discrimination')
 p <- p + theme(
+   plot.title = element_text(hjust = 0.5),
 	# Set the default font
 	text=element_text(
     family="Cabin",
@@ -91,6 +93,7 @@ p <- p + theme(
 	axis.ticks = element_blank(),
 	axis.title.x = element_text(
     margin=margin(t=5, r=0, b=0, l=0)))
+
 
 
 suppressGraphics(ggsave(

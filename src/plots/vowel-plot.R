@@ -204,7 +204,7 @@ ssbe.lab.df <- label.transform(
 showtext_opts(dpi=DPI)
 fontSize <- 12
 width = 6.25
-height = 3
+height = 3.5
 
 # Start plot and set some theme stuff
 p <- ggplot(data=) + theme(
@@ -214,6 +214,8 @@ p <- ggplot(data=) + theme(
     color=colors$panel.grid,
     linetype="13",
     lineend="round"),
+  plot.title = element_text(hjust = 0.5),
+  plot.subtitle = element_text(hjust = 0.5),
   axis.ticks=element_blank(),
   legend.position="right",
   legend.key=element_rect(
@@ -284,7 +286,8 @@ p <- p + geom_text(
 p <- p +  ylab("F1 (Lobanov)")
 p <- p +  xlab("F2 (Lobanov)")
 p <- p + facet_grid(.~group)
-
+p <- p + ggtitle('Acoustic analysis',
+  subtitle="Comparison of children's productions with SSBE prototypes")
 options(repr.plot.width=width, repr.plot.height=height)
 suppressGraphics(
   ggsave(file.path(outDir, "vowel-plot.png"), width=width, height=height, units="in", dpi=DPI))

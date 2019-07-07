@@ -22,12 +22,14 @@ IPA <- "#176FC1"
 dodge <- position_dodge(0.875)
 
 width <- 3.75
-height <- 3
+height <- 3.5
 
 
 
 showtext_opts(dpi=DPI)
 fontSize <- 14
+
+
 
 p <- ggplot(data=bx.df)
 p <- ggplot(
@@ -77,6 +79,7 @@ p <- p + theme(
 	text=element_text(
     family="Cabin",
     size=fontSize),
+   plot.title = element_text(hjust = 0.5),
 	# Set the legend position
 	legend.position="right",
 	# Remove the panel background and grid from the legend
@@ -96,6 +99,7 @@ p <- p + theme(
 	axis.title.x = element_text(
     margin=margin(t=5, r=0, b=0, l=0)))
 
+p <- p + ggtitle('Vowel intelligibility')
 
 suppressGraphics(ggsave(
   file.path(
