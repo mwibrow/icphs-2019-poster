@@ -202,12 +202,10 @@ Mark Wibrow\texorpdfstring{\,\textsuperscript{3} \and}{}}
   {\fontsize{128pt}{144pt}\CALVin} \\[0.75ex]
   {\Large\BubblegumSans Computer Assisted Learning for Vowels interface}
 \end{center}
-% \begin{itemize}
-%   \item
-%   c\ (Computer Assisted Learning for Vowels interface)
-%   \item
-%   Contrast \emph{Low variability} (\textbf{LV} - 1 speaker) and \emph{High variability} (\textbf{HV} - 4 speakers)
-% \end{itemize}
+\begin{itemize}
+  \item
+  Contrast \emph{Low variability} (\textbf{LV} - 1 speaker) and \emph{High variability} (\textbf{HV} - 4 speakers)
+\end{itemize}
 \vspace*{0.25in}
 \def\screenshotwidth{0.24\linewidth}
 \begin{columns}
@@ -242,11 +240,11 @@ Mark Wibrow\texorpdfstring{\,\textsuperscript{3} \and}{}}
 \setbox0=\vbox{\caption{}}
 \end{figure}
 \vspace*{0.25in}
-\begin{itemize}
-  \item Provides audio, video and images for carrier words
-  \item Shows an animated vocal tract for individual vowels
-  \item Enables participants to record and practice vowel production
-\end{itemize}
+% \begin{itemize}
+%   \item Provides audio, video and images for carrier words
+%   \item Shows an animated vocal tract for individual vowels
+%   \item Enables participants to record and practice vowel production
+% \end{itemize}
 \end{block}
 
 \end{column}
@@ -254,9 +252,16 @@ Mark Wibrow\texorpdfstring{\,\textsuperscript{3} \and}{}}
 \begin{block}{Results}
 \vspace*{0.125in}
 \begin{figure}[h]
-\begin{tikzfigure}[axb-plot]
-\includegraphics[width=0.95\linewidth]{plots/images/axb-boxplot.png}
+  \begin{minipage}{.45\textwidth}
+\begin{tikzfigure}[oddity-boxplot]
+\includegraphics[width=\linewidth]{plots/images/oddity-boxplot.png}
 \end{tikzfigure}
+\end{minipage}\hskip0.05\textwidth%
+\begin{minipage}{.45\textwidth}
+  \begin{tikzfigure}[vid-boxplot]
+  \includegraphics[width=\linewidth]{plots/images/vid-boxplot.png}
+  \end{tikzfigure}
+\end{minipage}
 \end{figure}
 %
 \vspace*{-0.25in}
@@ -269,27 +274,20 @@ Mark Wibrow\texorpdfstring{\,\textsuperscript{3} \and}{}}
 %
 \vspace*{-0.25in}
 %
-\begin{figure}[h]
-\begin{tikzfigure}[mahalanobis-plot]
-\includegraphics[width=0.45\linewidth]{plots/images/mahalanobis-plot.png}
-\end{tikzfigure}
-\hfill
-\begin{tikzfigure}[duration-plot]
-\includegraphics[width=0.225\linewidth]{plots/images/duration-plot.png}
-\includegraphics[width=0.225\linewidth]{plots/images/duration-model.png}
-\end{tikzfigure}
 
-\end{figure}
+\hfill
+
+
 
 \paragraph{Perception (category discrimination)}
 
-\begin{itemize}
-  \item No significant improvement in category discrimination
-  for LV or HV participants between pre-tests and post-tests --- figure \tikzfigureref{axb-plot}
-  \item This replicates previous results \cite{alshangiti_2015, hattori_2009}, where
-  production training did not improve perception
+% \begin{itemize}
+%   \item No significant improvement in category discrimination
+%   for LV or HV participants between pre-tests and post-tests --- figure \tikzfigureref{axb-plot}
+%   \item This replicates previous results \cite{alshangiti_2015, hattori_2009}, where
+%   production training did not improve perception
 
-\end{itemize}
+% \end{itemize}
 
 \paragraph{Production (imitation task)}
 
@@ -299,17 +297,17 @@ Mark Wibrow\texorpdfstring{\,\textsuperscript{3} \and}{}}
 between pre-tests and post-tests.
 Vowels centres --- SSBE vowels from \citep{hawkins_midgely_2005} ---
 shown in figure \tikzfigureref{vowel-plot}
-\item
-Classification according to an SSBE Mahalanobis-distance model
-(based on data from \citep{hawkins_midgely_2005})
-suggests an improvement for LV speakers between pre-tests and post-tests,
-although this just fails to reach significance (p\op=\op0.0528) --- figure \tikzfigureref{mahalanobis-plot}
+% \item
+% Classification according to an SSBE Mahalanobis-distance model
+% (based on data from \citep{hawkins_midgely_2005})
+% suggests an improvement for LV speakers between pre-tests and post-tests,
+% although this just fails to reach significance (p\op=\op0.0528) --- figure \tikzfigureref{mahalanobis-plot}
 
-\item
- Monophthong duration
- increases significantly between pre-tests and post-tests
- for both LV and HV groups [\op F\textsubscript{1, 723}\op=\op68.532, p\op<\op0.001\op]
- --- see figure \tikzfigureref{duration-plot}
+% \item
+%  Monophthong duration
+%  increases significantly between pre-tests and post-tests
+%  for both LV and HV groups [\op F\textsubscript{1, 723}\op=\op68.532, p\op<\op0.001\op]
+%  --- see figure \tikzfigureref{duration-plot}
 
 \end{itemize}
   \end{block}

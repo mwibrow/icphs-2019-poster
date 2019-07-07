@@ -17,13 +17,13 @@ bx.df$Test = factor(bx.df$Test, levels=c("pre", "post"))
 
 dodge <- position_dodge(0.875)
 
-width <- 5
+width <- 3.75
 height <- 3
 
 
 
 showtext_opts(dpi=DPI)
-fontSize <- 12
+fontSize <- 14
 
 p <- ggplot(data=bx.df)
 p <- ggplot(
