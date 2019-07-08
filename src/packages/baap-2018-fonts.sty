@@ -1,4 +1,5 @@
 \RequirePackage{fontspec}
+\RequirePackage{ifplatform}
 \def\fontspath{./src/fonts}
 \renewcommand\familydefault\sfdefault
 \setsansfont[
@@ -26,4 +27,8 @@
     Path=\fontspath/Bubblegum_Sans/,
     UprightFont=BubblegumSans-Regular.ttf,
 ]{BubblegumSans}
-\newfontfamily\Arial{Liberation Sans}
+% \iflinux
+%     \newfontfamily\Arial{Liberation Sans}
+% \else
+% \newfontfamily\Arial{Arial}
+% \fi
