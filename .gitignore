@@ -18,3 +18,4 @@ color_profiles/
 src/plots/images/*.png
 src/images/CALVin-screenshots/jpgs/
 poster.pdf
+*.pdf

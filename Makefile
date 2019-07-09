@@ -22,7 +22,7 @@ final: dpi=1200
 final: all
 
 poster: paths latex biber rerun rererun
-	cp $(output_dir)/$(jobname).pdf ./
+	cp $(output_dir)/$(jobname).pdf ./icphs-2019-poster.pdf
 
 latex rerun rererun: $(src)
 	TEXINPUTS="$(TEXINPUTS)" $(latex) -recorder --output-directory=$(output_dir) --interaction=nonstopmode --jobname=$(jobname) $(src)
