@@ -287,9 +287,7 @@ p <- p +  ylab("F1 (Lobanov)")
 p <- p +  xlab("F2 (Lobanov)")
 p <- p + facet_grid(.~group)
 p <- p + ggtitle('Acoustic analysis',
-  subtitle="Comparison of children's productions with SSBE prototypes")
+  subtitle="Comparison of monopththong productions with SSBE prototypes")
 options(repr.plot.width=width, repr.plot.height=height)
 suppressGraphics(
   ggsave(file.path(outDir, "vowel-plot.png"), width=width, height=height, units="in", dpi=DPI))
-
-

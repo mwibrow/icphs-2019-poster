@@ -70,6 +70,24 @@ Mark Wibrow\texorpdfstring{\,\textsuperscript{3} \and}{}}
 
 \def\chisq{\begingroup\DejaVuSans\char"03C7\endgroup\textsuperscript{2}}
 \def\textem#1{\emph{#1}}
+
+\newbox\tmptitlebox
+\setbeamertemplate{block begin}{%
+  \vskip.5ex
+  \begin{beamercolorbox}[leftskip=0.5cm,colsep*=.75ex]{block title}%
+    \setbox\tmptitlebox=\hbox{\usebeamerfont*{block title}\insertblocktitle}%
+    \dp\tmptitlebox=0.5ex\relax%
+    \box\tmptitlebox%
+  \end{beamercolorbox}%
+  {\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5pt}}%
+  \usebeamerfont{block body}%
+  \begin{beamercolorbox}[colsep*=.75ex,sep=.5ex,vmode]{block body}%
+    \ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+  }%
+  \setbeamertemplate{block end}{%
+  \end{beamercolorbox}%
+}
+
 \begin{document}
 
 \begin{frame}[t]
@@ -207,7 +225,7 @@ Mark Wibrow\texorpdfstring{\,\textsuperscript{3} \and}{}}
   {\Large\BubblegumSans Computer Assisted Learning for Vowels interface}
 \end{center}
 
-\vspace*{0.5in}
+\vspace*{0.375in}
 
 \begin{tabular}{ccc}
   \large Low variability (\textbf{LV}) &vs& \large High variability (\textbf{HV})
@@ -299,14 +317,16 @@ No significant difference between training groups, but a significant
 interaction between training group and test:
 \chisq (1) = 4.667, p < .05
 \item
-LV group performed slightly better at the post test than the HV group:
+LV group performed slightly better at post-test than the HV group:
 b = -0.1998, SE = 0.0924, z = 2.161, p < .05
 \end{itemize}
+
+
 \paragraph{Production (vowel intelligibility)}
 
 \begin{itemize}
   \item
-    Significant change in vowel production accuracy from pre-to post-test,
+    Significant change in vowel production accuracy from pre- to post-test,
     \chisq (1) = 16.762, p < .001 --- see figure \tikzfigureref{vid-boxplot}
   \item
     Significant effect of training group,
@@ -315,9 +335,9 @@ b = -0.1998, SE = 0.0924, z = 2.161, p < .05
     Planned contrasts showed that the LV group performed slightly better than the HV group,
     b=0.374, SE=0.141, z=2.645, p<.01
 \end{itemize}
-  \end{block}
 
-  \vspace*{-0.125in}
+
+
 \paragraph{Production (imitation task)}
 
 \def\op{\hskip0.2ex}
@@ -327,7 +347,7 @@ between pre-tests and post-tests.
 Vowels centres --- SSBE vowels from \citep{hawkins_midgely_2005} ---
 shown in figure \tikzfigureref{vowel-plot}
 \item
-Linear mixed models showed no significant change in F1 or F2 values from pre to post-test
+Linear mixed models showed no significant change in F1 or F2 from pre- to post-test
 
 % \item
 %  Monophthong duration
@@ -338,9 +358,7 @@ Linear mixed models showed no significant change in F1 or F2 values from pre to 
 \end{itemize}
 
 
-
-
-\vspace*{0.25in}
+\end{block}
 
 
 \begin{block}{Conclusions}
@@ -363,12 +381,15 @@ Linear mixed models showed no significant change in F1 or F2 values from pre to 
 \end{itemize}
 \end{block}
 
+\vspace*{-0.125in}
+
 \begin{block}{\small References}
   \renewcommand\bibfont{\tiny}
   \printbibliography
 \end{block}
 
-\vspace*{-0.125in}
+%\vspace*{-0.125in}
+
 \textbf{Acknowledgements}
 
   This work was supported by
