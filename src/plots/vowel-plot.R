@@ -204,7 +204,7 @@ ssbe.lab.df <- label.transform(
 showtext_opts(dpi=DPI)
 fontSize <- 12
 width = 6.25
-height = 3.5
+height = 4
 
 # Start plot and set some theme stuff
 p <- ggplot(data=) + theme(
@@ -217,15 +217,24 @@ p <- ggplot(data=) + theme(
   plot.title = element_text(hjust = 0.5),
   plot.subtitle = element_text(hjust = 0.5),
   axis.ticks=element_blank(),
-  legend.position="right",
+  legend.position=c(0.5,0.05),
+  legend.justification=c(0.5,0),
   legend.key=element_rect(
-    fill="transparent",
+    fill="white",
     colour="transparent"),
+  legend.background=element_rect(
+    fill="white",
+    colour="transparent"
+  ),
+  legend.spacing.y=unit(.1, "cm"),
   axis.title.x = element_text(
     margin = margin(t = 7.5, r = 0, b = 0, l = 0),
     size=fontSize*0.875),
   axis.title.y = element_text(
-    size=fontSize*0.875))
+    size=fontSize*0.875)
+  # legend.margin=margin(0,0,0,0),
+  # legend.box.margin=margin(-4,-4,-4,-4)
+  )
 # Reverse scales
 p <- p + scale_y_reverse(
   expand=c(0.02,0.02),
@@ -255,7 +264,7 @@ p <- p + geom_text(
   vjust=0.4,
   size=fontSize*0.3)
 # Add an extra legend entry
-p <- p + scale_fill_manual("", breaks = "SSBE", values=colors$ssbe)
+p <- p + scale_fill_manual(element_blank(), breaks = "SSBE", values=colors$ssbe)
 
 # Draw lines between pre and post
 p <- p + geom_segment(

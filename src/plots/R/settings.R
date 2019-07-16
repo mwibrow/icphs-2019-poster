@@ -1,4 +1,4 @@
-list.of.packages <- c("ggplot2", "showtext", "reshape2", "plyr", "stringr", "R.devices")
+list.of.packages <- c("ggplot2", "cowplot", "showtext", "reshape2", "plyr", "stringr", "R.devices")
 
 ensure.packages <- function(packages=list.of.packages) {
   new.packages <- packages[!(packages %in% installed.packages()[,"Package"])]
@@ -97,8 +97,8 @@ with(colors, {
   post <- "#E91E63"
   arrow <- "#444444"
   hvd <- "#176FC1" # "#0288D1"
-  ssbe <- "#cccccc"
-  ssbe.label <- "#cccccc"
+  ssbe <- "#999999"
+  ssbe.label <- "#999999"
   panel.background <- "#eeeeee"
   panel.grid <- "#ffffff"
   median <- "#ffffff"

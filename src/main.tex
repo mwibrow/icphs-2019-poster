@@ -25,7 +25,7 @@
 {\egroup\begin{tikzpicture}%
 \node (@) [anchor=south, inner sep=0, outer sep=0]{\box\tikzfigurebox};
 \node [figure label, anchor=north]
-at ([shift=(90:0.25in)]@.north west) {\thefigure};
+at ([shift=(90:-0.25in)]@.north west) {\thefigure};
 \setbox0=\vbox{\caption{somecaption}}
 \end{tikzpicture}}
 \def\tikzfigureref#1{\hskip0.125ex
@@ -96,6 +96,7 @@ Mark Wibrow\texorpdfstring{\,\textsuperscript{3} \and}{}}
 
 \begin{column}{0.4\linewidth}
 \begin{block}{Introduction}
+  \vspace*{-0.125in}
   \begin{itemize}
     \item \Cabin
   High-variability phonetic training (HV) has been shown to be
@@ -110,24 +111,28 @@ Mark Wibrow\texorpdfstring{\,\textsuperscript{3} \and}{}}
   \item
   Previous work \cite{alshangiti_2015} trained adult Arabic-speaking
   learners of English in their production of SSBE vowels
-  using a computer-based training programme CALVin (Computer Assisted Learning for Vowels interface).
+  using a computer-based training programme \textbf{CALVin}
+  (\textbf{C}omputer \textbf{A}ssisted \textbf{L}earning for \textbf{V}owels \textbf{in}terface).
  The results were in line with previous work for consonants \cite{hattori_2009}
  in that training appeared to be domain-specific
  \item
- The current study adapts CALVin for children, to investigate the effect of
- HV and LV production training on Arabic-speaking children
+ The current study adapts CALVin for children, to investigate potential benefits
+ of HV \& LV production training for English vowel production and perception
+ in Arabic-speaking children
   \end{itemize}
 \end{block}
 
 \begin{block}{Methods}
+  \vspace*{-0.125in}
 \paragraph{Participants}
 \begin{itemize}
   \item 46 monolingual Arabic-speaking Saudi children (aged 10 -- 12)
   \item 22 completed 5 sessions of High Variability training (HV)
   \item 24 completed 5 sessions of Low Variability training (LV)
+  \item Groups matched by vowel discrimination scores at pre-test
 \end{itemize}
 
-\vspace*{0.125in}
+
 \paragraph{Pre-tests}
 \begin{itemize}
   \item
@@ -201,6 +206,7 @@ Mark Wibrow\texorpdfstring{\,\textsuperscript{3} \and}{}}
   \end{tabular}
 \end{center}
 
+\vspace*{-0.125in}
 \paragraph{Post-tests}
 \multicolsep=0pt
 \begin{multicols}{2}
@@ -225,7 +231,7 @@ Mark Wibrow\texorpdfstring{\,\textsuperscript{3} \and}{}}
   {\Large\BubblegumSans Computer Assisted Learning for Vowels interface}
 \end{center}
 
-\vspace*{0.375in}
+\vspace*{0.25in}
 
 \begin{tabular}{ccc}
   \large Low variability (\textbf{LV}) &vs& \large High variability (\textbf{HV})
@@ -235,7 +241,7 @@ Mark Wibrow\texorpdfstring{\,\textsuperscript{3} \and}{}}
 4 speakers  + the instructor
 \end{tabular}
 
-\vspace*{0.5in}
+\vspace*{0.375in}
 
 \def\screenshotwidth{0.24\linewidth}
 \begin{columns}
@@ -294,17 +300,17 @@ Mark Wibrow\texorpdfstring{\,\textsuperscript{3} \and}{}}
 \end{minipage}
 \end{figure}
 %
-\vspace*{-0.25in}
+\vspace*{-0.5in}
 %
 \begin{figure}[h]
 \begin{tikzfigure}[vowel-plot]
-\includegraphics[width=0.95\linewidth]{plots/images/vowel-plot.png}
+\kern-1in\includegraphics[width=\linewidth]{plots/images/vowel-plot.png}
 \end{tikzfigure}
 \end{figure}
 %
 %
 
-
+\vspace*{-0.25in}
 
 \paragraph{Perception (category discrimination)}
 
@@ -390,7 +396,7 @@ Linear mixed models showed no significant change in F1 or F2 from pre- to post-t
 
 %\vspace*{-0.125in}
 
-\textbf{Acknowledgements}
+%\textbf{Acknowledgements}
 
   This work was supported by
   grant G-474-270-38 from King Abdulaziz University
