@@ -233,9 +233,9 @@ p <- ggplot(data=) + theme(
     margin = margin(t = 7.5, r = 0, b = 0, l = 0),
     size=fontSize*0.875),
   axis.title.y = element_text(
-    size=fontSize*0.875)
-  # legend.margin=margin(0,0,0,0),
-  # legend.box.margin=margin(-4,-4,-4,-4)
+    size=fontSize*0.875),
+  legend.margin=margin(0,8,2,2),
+  #legend.box.margin=margin(-4,0,0,0)
   )
 # Reverse scales
 p <- p + scale_y_reverse(
