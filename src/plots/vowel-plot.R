@@ -209,6 +209,7 @@ height = 4
 # Start plot and set some theme stuff
 p <- ggplot(data=) + theme(
   text=element_text(family="Cabin", size=fontSize),
+  plot.background = element_rect(fill = "transparent", color = NA),
   panel.background=element_rect(fill=colors$panel.background),
   panel.grid.major=element_line(
     color=colors$panel.grid,
@@ -227,6 +228,7 @@ p <- ggplot(data=) + theme(
     colour="transparent"
   ),
   legend.spacing.y=unit(.1, "cm"),
+  legend.title=element_blank(),
   axis.title.x = element_text(
     margin = margin(t = 7.5, r = 0, b = 0, l = 0),
     size=fontSize*0.875),
@@ -252,8 +254,7 @@ p <- p + coord_cartesian(xlim=c(2.1,-2.1), ylim=c(2.1, -2.1))
 # Add SSBE points...
 p <- p + geom_point(
   data=ssbe.lob.df,
-  aes(x=f2, y=f1, fill="SSBE"),
-  color=colors$ssbe,
+  aes(x=f2, y=f1, color="ssbe"),
   size=2)
 # ...and SSBE labels
 p <- p + geom_text(
@@ -263,8 +264,7 @@ p <- p + geom_text(
   family="DejaVuSans",
   vjust=0.4,
   size=fontSize*0.3)
-# Add an extra legend entry
-p <- p + scale_fill_manual(element_blank(), breaks = "SSBE", values=colors$ssbe)
+
 
 # Draw lines between pre and post
 p <- p + geom_segment(
@@ -280,7 +280,9 @@ p <- p + geom_point(
   aes(x=f2, y=f1, color=test),
   size=2)
 p <- p + scale_color_manual(
-  values=c(colors$pre, colors$post),
+  breaks=c('pre', 'post', 'ssbe'),
+  labels=c('Pre-test', 'Post-test', 'SSBE'),
+  values=c(colors$pre, colors$post,  colors$ssbe),
   name="Test")
 
 # Add labels to pre points
@@ -299,4 +301,4 @@ p <- p + ggtitle('Acoustic analysis',
   subtitle="Comparison of monopththong productions with SSBE prototypes")
 options(repr.plot.width=width, repr.plot.height=height)
 suppressGraphics(
-  ggsave(file.path(outDir, "vowel-plot.png"), width=width, height=height, units="in", dpi=DPI))
+  ggsave(file.path(outDir, "vowel-plot.png"), bg = "transparent", width=width, height=height, units="in", dpi=DPI))

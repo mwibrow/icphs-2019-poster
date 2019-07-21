@@ -13,16 +13,18 @@ screenshots=$(input_dir)/images/CALVin-screenshots
 TEXINPUTS:=$(input_dir)//:$(TEXINPUTS)
 BIBINPUTS:=$(input_dir)//:$(BIBINPUTS)
 dpi=300
+title=icphs-2019-poster.pdf
 underline=printf '=%.0s' {1..40}
 
 
 all: images plots poster
 
 final: dpi=1200
+final: title=icphs-2019-poster-print.pdf
 final: all
 
 poster: paths latex biber rerun rererun
-	cp $(output_dir)/$(jobname).pdf ./icphs-2019-poster.pdf
+	cp $(output_dir)/$(jobname).pdf ./$(title)
 
 latex rerun rererun: $(src)
 	TEXINPUTS="$(TEXINPUTS)" $(latex) -recorder --output-directory=$(output_dir) --interaction=nonstopmode --jobname=$(jobname) $(src)
