@@ -218,7 +218,7 @@ p <- ggplot(data=) + theme(
   plot.title = element_text(hjust = 0.5),
   plot.subtitle = element_text(hjust = 0.5),
   axis.ticks=element_blank(),
-  legend.position=c(0.5,0.05),
+  legend.position=c(0.5,0.046),
   legend.justification=c(0.5,0),
   legend.key=element_rect(
     fill="white",
@@ -234,7 +234,7 @@ p <- ggplot(data=) + theme(
     size=fontSize*0.875),
   axis.title.y = element_text(
     size=fontSize*0.875),
-  legend.margin=margin(0,8,2,2),
+  legend.margin=margin(t=2,r=8,b=4,l=2),
   #legend.box.margin=margin(-4,0,0,0)
   )
 # Reverse scales
