@@ -19,7 +19,7 @@ underline=printf '=%.0s' {1..40}
 
 all: images plots poster
 
-final: dpi=1200
+final: dpi=900
 final: title=icphs-2019-poster-print.pdf
 final: all
 

@@ -209,8 +209,8 @@ height = 4
 # Start plot and set some theme stuff
 p <- ggplot(data=) + theme(
   text=element_text(family="Cabin", size=fontSize),
-  plot.background = element_rect(fill = "transparent", color = NA),
-  panel.background=element_rect(fill=colors$panel.background),
+  plot.background=element_rect(fill="white", color="transparent"),
+  panel.background=element_rect(fill=colors$panel.background, color="transparent"),
   panel.grid.major=element_line(
     color=colors$panel.grid,
     linetype="13",
@@ -222,10 +222,10 @@ p <- ggplot(data=) + theme(
   legend.justification=c(0.5,0),
   legend.key=element_rect(
     fill="white",
-    colour="transparent"),
+    colour="white"),
   legend.background=element_rect(
     fill="white",
-    colour="transparent"
+    colour="white"
   ),
   legend.spacing.y=unit(.1, "cm"),
   legend.title=element_blank(),
@@ -301,4 +301,4 @@ p <- p + ggtitle('Acoustic analysis',
   subtitle="Comparison of monopththong productions with SSBE prototypes")
 options(repr.plot.width=width, repr.plot.height=height)
 suppressGraphics(
-  ggsave(file.path(outDir, "vowel-plot.png"), bg = "transparent", width=width, height=height, units="in", dpi=DPI))
+  ggsave(file.path(outDir, "vowel-plot.png"), width=width, height=height, units="in", dpi=DPI))
