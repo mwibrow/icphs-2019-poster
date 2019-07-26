@@ -20,7 +20,7 @@ underline=printf '=%.0s' {1..40}
 all: images plots poster
 
 final: dpi=900
-final: title=icphs-2019-poster-print.pdf
+final: title=icphs-2019-poster.pdf
 final: all
 
 screen: dpi=300
@@ -49,8 +49,8 @@ plots: paths
 images: paths
 ifeq ($(dpi), 300)
 	@ cd $(screenshots); \
-	echo; echo Scaling and converting images; echo `$(underline)`; \
-	mogrify -verbose -format jpg -path jpgs -scale 25% pngs/*.png;
+	echo; echo Scaling and converting images $(dpi); echo `$(underline)`; \
+	mogrify -verbose -format jpg -path jpgs -scale 10% pngs/*.png;
 else
     @ cd $(screenshots); \
 	echo; echo Converting images; echo `$(underline)`; \
