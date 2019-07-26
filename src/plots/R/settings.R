@@ -1,4 +1,4 @@
-list.of.packages <- c("ggplot2", "cowplot", "showtext", "reshape2", "plyr", "stringr", "R.devices")
+list.of.packages <- c("ggplot2", "showtext", "reshape2", "plyr", "stringr", "R.devices")
 
 ensure.packages <- function(packages=list.of.packages) {
   new.packages <- packages[!(packages %in% installed.packages()[,"Package"])]

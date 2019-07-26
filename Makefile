@@ -23,6 +23,10 @@ final: dpi=900
 final: title=icphs-2019-poster-print.pdf
 final: all
 
+screen: dpi=300
+screen: title=icphs-2019-poster-screen.pdf
+screen: all
+
 poster: paths latex biber rerun rererun
 	cp $(output_dir)/$(jobname).pdf ./$(title)
 
@@ -58,6 +62,7 @@ clear-fontcache:
 	luaotfload-tool --cache=erase
 
 clean: FORCE
-	rm -R build
+	rm -R build; \
+	rm *.pdf
 
 FORCE:
