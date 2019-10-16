@@ -4,7 +4,12 @@ dataDir <- "data"
 
 rad <- function(a) a / 180 * pi
 
+bark <- function(x) {
+  return (26.81 * log(1 + x / (x + 1960)) - 0.53)
+}
 lobanov <- function(df, f1="f1", f2="f2", vowel="vowel", group=c(), reduce=TRUE) {
+  df$f1 <- bark(df$f1)
+  df$f2 <- bark(df$f2)
   ddply(df, group, function(df.grp) {
     f1.grp <- df.grp[,f1]
     f2.grp <- df.grp[,f2]
@@ -34,9 +39,11 @@ ssbe.df <- data.frame(
   f1=c(273, 386, 527, 751, 655, 552, 452, 397, 291, 623, 527),
   f2=c(2289, 2038, 1801, 1558, 1044, 986, 793, 1550, 1672, 1370, 1528))
 
-ssbe.df <- read.csv(file.path(dataDir, "hawkins_midgely_2005.csv"))
+# ssbe.df <- read.csv(file.path(dataDir, "hawkins_midgely_2005.csv"))
+ssbe.df <- read.csv(file.path(dataDir, "F1F2-50.csv"))
 
 ssbe.lob.df <- lobanov(ssbe.df, group=c("speaker"))
+
 ssbe.lob.df <- ddply(ssbe.lob.df, c("vowel"), function(subset) {
   data.frame(f1=mean(subset$f1), f2=mean(subset$f2))
 })
@@ -151,11 +158,11 @@ with(transforms, {
   with(HV, {
     "i:" <- 90
     "æ" <- 180
-    "ɪ" <- 270
+    "ɪ" <- 0
     "ɜ:" <- 180
     "e" <- 90
-    "ɑ:" <- 0
-    "ʌ" <- 45
+    "ɑ:" <- 90
+    "ʌ" <- 0
     "u:" <- 90
     "ɒ" <- 240
       "ɔ:" <- 300
@@ -168,21 +175,21 @@ with(transforms.ssbe, {
   LV <- new.env(hash=TRUE)
   HV <- new.env(hash=TRUE)
   with(LV, {
-    "ʌ" <- 180
+    "ʌ" <- 270
     "e" <- 270
     "ɪ" <- 270
-    "ɑ:" <- 270
+    "ɑ:" <- 0
     "ɒ" <- 0
-       "u:" <- 270
+       "u:" <- 0
   })
   with(HV, {
     "æ" <- 180
-    "ɪ" <- 180
+    "ɪ" <- 270
     "e" <- 180
-    "ʌ" <- 210
-     "u:" <- 180
+    "ʌ" <- 270
+     "u:" <- 0
      "ɒ" <- 0
-      "ɑ:" <- 270
+      "ɑ:" <- 0
   })
 })
 
@@ -200,26 +207,29 @@ ssbe.lab.df <- label.transform(
   default=list(angle=90, r=0.22))
 
 
-
+DPI = 600
 showtext_opts(dpi=DPI)
 fontSize <- 12
-width = 6.25
-height = 4
+width = 7.25
+height = 3.75
 
+colors$ssbe = '#999999'
 # Start plot and set some theme stuff
 p <- ggplot(data=) + theme(
   text=element_text(family="Cabin", size=fontSize),
-  plot.background=element_rect(fill="white", color="transparent"),
-  panel.background=element_rect(fill=colors$panel.background, color="transparent"),
+  panel.background = element_blank(),
+  panel.border = element_rect(colour = "#dddddd", fill=NA, size=1),
+  #plot.background=element_rect(fill="white", color="transparent"),
+  #panel.background=element_rect(fill=colors$panel.background, color="transparent"),
   panel.grid.major=element_line(
-    color=colors$panel.grid,
+    color="#dddddd",
     linetype="13",
     lineend="round"),
   plot.title = element_text(hjust = 0.5),
   plot.subtitle = element_text(hjust = 0.5),
   axis.ticks=element_blank(),
-  legend.position=c(0.5,0.046),
-  legend.justification=c(0.5,0),
+  # legend.position=c(0.5,0.046),
+  # legend.justification=c(0.5,0),
   legend.key=element_rect(
     fill="white",
     colour="white"),
@@ -252,9 +262,10 @@ p <- p + scale_x_reverse(
 p <- p + coord_cartesian(xlim=c(2.1,-2.1), ylim=c(2.1, -2.1))
 
 # Add SSBE points...
+ssbe.lob.df$ssbe = 'ssbe'
 p <- p + geom_point(
   data=ssbe.lob.df,
-  aes(x=f2, y=f1, color="ssbe"),
+  aes(x=f2, y=f1, shape=ssbe, color=ssbe),
   size=2)
 # ...and SSBE labels
 p <- p + geom_text(
@@ -277,13 +288,24 @@ p <- p + geom_segment(
 # Draw pre and post points
 p <- p + geom_point(
   data=lob.mn.df,
-  aes(x=f2, y=f1, color=test),
+  aes(x=f2, y=f1, shape=test, color=test),
   size=2)
+# p <- p + scale_discrete_manual(
+#   c("shape"),
+#   values=c(20,19,18),
+#   labels=c('Pre-test', 'Post-test', 'SSBE')
+# )
 p <- p + scale_color_manual(
   breaks=c('pre', 'post', 'ssbe'),
   labels=c('Pre-test', 'Post-test', 'SSBE'),
-  values=c(colors$pre, colors$post,  colors$ssbe),
+  values=c(colors$pre, colors$post, colors$ssbe),
   name="Test")
+p <- p + scale_shape_manual(
+  breaks=c('pre', 'post', 'ssbe'),
+  labels=c('Pre-test', 'Post-test', 'SSBE'),
+  values=c(19,20,18),
+  name="Test")
+
 
 # Add labels to pre points
 p <- p + geom_text(
@@ -297,8 +319,8 @@ p <- p + geom_text(
 p <- p +  ylab("F1 (Lobanov)")
 p <- p +  xlab("F2 (Lobanov)")
 p <- p + facet_grid(.~group)
-p <- p + ggtitle('Acoustic analysis',
-  subtitle="Comparison of monopththong productions with SSBE prototypes")
+# p <- p + ggtitle('Acoustic analysis',
+#   subtitle="Comparison of monopththong productions with SSBE prototypes")
 options(repr.plot.width=width, repr.plot.height=height)
 suppressGraphics(
   ggsave(file.path(outDir, "vowel-plot.png"), width=width, height=height, units="in", dpi=DPI))

@@ -93,8 +93,8 @@ lobanov <- function(df, f1="f1", f2="f2", vowel="vowel", group=c(), reduce=TRUE)
 
 colors <- new.env()
 with(colors, {
-  pre <-  "#F8BBD0"
-  post <- "#E91E63"
+  post <-  "#F8BBD0"
+  pre <- "#E91E63"
   arrow <- "#444444"
   hvd <- "#176FC1" # "#0288D1"
   ssbe <- "#999999"
@@ -103,6 +103,11 @@ with(colors, {
   panel.grid <- "#ffffff"
   median <- "#ffffff"
   ipa <- "#176FC1"
+  ##
+  post <-  "#000000"
+  pre <- "#000000"
+  ssbe <- "#aaaaaa"
+  ipa <- "#000000"
 })
 
 
