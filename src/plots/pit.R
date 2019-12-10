@@ -129,7 +129,7 @@ legend.margin=margin(t=0,r=0,b=0,l=0),
     colour="transparent"))
 
 #p <- p + ggtitle('Vowel intelligibility')
-
+p <- p + ylab("Accuracy (%)")
 suppressGraphics(ggsave(
   file.path(
     outDir,

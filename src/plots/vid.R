@@ -102,8 +102,6 @@ p <- p + theme(
   axis.ticks=element_blank(),
    axis.text.x = element_text(size=fontSize*0.75),
     axis.text.y = element_text(size=fontSize*0.75),
-     axis.title.y = element_text(
-    margin=margin(t=0, r=0, b=0, l=0)),
 legend.position="bottom",
 legend.margin=margin(t=0,r=0,b=0,l=0),
   legend.key=element_rect(
@@ -111,6 +109,8 @@ legend.margin=margin(t=0,r=0,b=0,l=0),
     colour="transparent"))
 
 #p <- p + ggtitle('Vowel intelligibility')
+
+p <- p + ylab("Accuracy (%)")
 
 suppressGraphics(ggsave(
   file.path(

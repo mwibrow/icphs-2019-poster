@@ -98,7 +98,7 @@ legend.margin=margin(t=0,r=0,b=0,l=0),
     fill="transparent",
     colour="transparent"))
 
-
+p <- p + ylab("Accuracy (%)")
 
 suppressGraphics(ggsave(
   file.path(
