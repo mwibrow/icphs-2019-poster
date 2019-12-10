@@ -215,7 +215,7 @@ height = 7.25
 colors$ssbe = '#999999'
 # Start plot and set some theme stuff
 p <- ggplot(data=) + theme(
-  text=element_text(family="Cabin", size=fontSize),
+  text=element_text(family="DejaVuSans", size=fontSize),
   panel.background = element_blank(),
   panel.border = element_rect(colour = "#dddddd", fill=NA, size=1),
   #plot.background=element_rect(fill="white", color="transparent"),
@@ -245,9 +245,9 @@ p <- ggplot(data=) + theme(
     size=fontSize*0.875),
   legend.margin=margin(t=0,r=8,b=4,l=2),
   legend.box.margin=margin(-2,0,0,0),
-  strip.background = element_blank(),
-  strip.text.x = element_blank(),
-  strip.text.y = element_blank()
+  # strip.background = element_blank(),
+  # strip.text.x = element_blank(),
+  # strip.text.y = element_blank()
   )
 # Reverse scales
 p <- p + scale_y_reverse(
@@ -318,17 +318,17 @@ p <- p + geom_text(
   vjust=0.4,
   size=fontSize*0.4)
 
-groupDf <- data.frame(f1=1.75, f2=-1.625, group=c("LV", "HV"))
-p <- p + geom_label(
-  data=groupDf,
-  aes(x=f2, y=f1, label=group),
-  family="DejaVuSans", label.size=0, fill="#cccccc")
+# groupDf <- data.frame(f1=1.75, f2=-1.625, group=c("LV", "HV"))
+# p <- p + geom_label(
+#   data=groupDf,
+#   aes(x=f2, y=f1, label=group),
+#   family="DejaVuSans", label.size=0, fill="#cccccc")
 
 p <- p +  ylab("F1 (Lobanov)")
 p <- p +  xlab("F2 (Lobanov)")
-p <- p + facet_grid(rows=vars(group))
+p <- p + facet_wrap(vars(group), nrow=2,ncol=1,strip.position="top")
 # p <- p + ggtitle('Acoustic analysis',
 #   subtitle="Comparison of monopththong productions with SSBE prototypes")
 options(repr.plot.width=width, repr.plot.height=height)
 suppressGraphics(
-  ggsave(file.path(outDir, "vowel-plot.png"), width=width, height=height, units="in", dpi=DPI))
+  ggsave(file.path(outDir, "vowel-plot.jpg"), device="jpeg", width=width, height=height, units="in", dpi=DPI))

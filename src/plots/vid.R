@@ -18,18 +18,19 @@ PRE <- "#E91E63"
 MD <- "#FCE4EC"
 IPA <- "#176FC1"
 
+colors$pre = '#777777'
 
 dodge <- position_dodge(0.875)
 
-width <- 3.75
-height <- 3.25
+width <- 3.33
+height <- 3.75
 
 
 
 showtext_opts(dpi=DPI)
 fontSize <- 14
 
-
+colors$pre = '#999999'
 
 p <- ggplot(data=bx.df)
 p <- ggplot(
@@ -50,10 +51,22 @@ p <- p + scale_y_continuous(
 	breaks=seq(0, 100, 25),
 	labels=seq(0, 100, 25))
 
+# p <- p + scale_fill_manual(
+#   values=c(pre=colors$pre, post=colors$post))
+# p <- p + scale_color_manual(
+#   values=c(pre=colors$pre, post=colors$post))
+
 p <- p + scale_fill_manual(
-  values=c(pre=colors$pre, post=colors$post))
+    breaks=c("pre", "post"),
+    labels=c("Pre", "Post"),
+    values=c(pre=colors$pre, post=colors$post),
+    name="Test"
+)
 p <- p + scale_color_manual(
-  values=c(pre=colors$pre, post=colors$post))
+    breaks=c("pre", "post"),
+    labels=c("Pre", "Post"),
+    values=c(pre=colors$pre, post=colors$post),
+    name="Test")
 
 dat <- ggplot_build(p)$data[[1]]
 dat <- cbind(
@@ -75,39 +88,34 @@ p <- p + geom_segment(
   colour=colors$median)
 
 p <- p + theme(
-	# Set the default font
-	text=element_text(
-    family="Cabin",
-    size=fontSize),
-   plot.title = element_text(hjust = 0.5),
-	# Set the legend position
-	legend.position="right",
-	# Remove the panel background and grid from the legend
-	legend.key=element_rect(
-	  fill="transparent",
-	  colour="transparent"),
-	# Change the color of the graph background
-	panel.background=element_rect(
-    fill=colors$panel.background),
-	# Make the grid lines dashed
-	panel.grid.major=element_line(
-    color=colors$panel.grid.major,
+  plot.title = element_text(hjust = 0.5),
+	panel.background = element_blank(),
+  panel.border = element_rect(colour = "#dddddd", fill=NA, size=1),
+        # panel.grid.major = element_blank(),
+        # panel.grid.minor = element_blank(),
+  #panel.background=element_rect(fill="transparent"),#colors$panel.background),
+  panel.grid.major=element_line(
+    color="#dddddd",#colors$panel.grid,
     linetype="13",
     lineend="round"),
-	# Remove tick marks
-	axis.ticks = element_blank(),
-	axis.title.x = element_text(
-    margin=margin(t=5, r=0, b=0, l=0)))
+   text=element_text(family="DejaVuSans", size=fontSize),
+  axis.ticks=element_blank(),
+   axis.text.x = element_text(size=fontSize*0.75),
+    axis.text.y = element_text(size=fontSize*0.75),
+legend.position="bottom",
+legend.margin=margin(t=0,r=0,b=0,l=0),
+  legend.key=element_rect(
+    fill="transparent",
+    colour="transparent"))
 
-p <- p + ggtitle('Vowel intelligibility')
+#p <- p + ggtitle('Vowel intelligibility')
 
 suppressGraphics(ggsave(
   file.path(
     outDir,
-    "vid-boxplot.png"),
+    "vid-boxplot.jpg"),
+  device="jpeg",
   width=width,
   height=height,
   units="in",
   dpi=DPI));
-
-

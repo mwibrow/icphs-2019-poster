@@ -29,11 +29,11 @@ vwl.df$Test = factor(vwl.df$Test, c('pre', 'post', 'SSBE'))
 # post.rows <- nrow(vwl.df)
 # cat(sprintf("Removed %d outliers\n", pre.rows - post.rows))
 
-colors$pre = '#777777'
+colors$pre = '#999999'
 colors$ssbe = '#bbbbbb'
 dpi <- 600
 width <- 3.333
-height <- 3
+height <- 3.5
 options(repr.plot.width=width, repr.plot.height=height)
 
 showtext_opts(dpi=dpi)
@@ -49,7 +49,7 @@ p <- ggplot() + theme(
     color="#dddddd",#colors$panel.grid,
     linetype="13",
     lineend="round"),
-   text=element_text(family="Cabin", size=fontSize),
+   text=element_text(family="DejaVuSans", size=fontSize),
   axis.ticks=element_blank(),
    axis.text.x = element_text(size=fontSize*0.75),
    axis.title.x = element_text(hjust=0.333),
@@ -67,13 +67,13 @@ p <- p + geom_boxplot(
 p <- p + scale_fill_manual(
     breaks=c("pre", "post"),
     labels=c("Pre", "Post"),
-    values=c(pre=colors$pre, post=colors$post, SSBE=colors$ssbe),
+    values=c(pre=colors$pre, post=colors$post, SSBE='#ffffff'),
     name="Test"
 )
 p <- p + scale_color_manual(
     breaks=c("pre", "post"),
     labels=c("Pre", "Post"),
-    values=c(pre=colors$pre, post=colors$post, SSBE=colors$ssbe),
+    values=c(pre=colors$pre, post=colors$post, SSBE=colors$post),
     name="Test")
 
 p <- p + xlab("Group") +
@@ -93,8 +93,9 @@ dat$Test <- c("pre", "post", "pre", "post", "SSBE")
 dat$Group <- c("LV", "LV", "HV", "HV", "SSBE")
 
 dat$Group <- factor(dat$Group, levels=c("LV", "HV", 'SSBE'))
+dat <- head(dat, 4)
 p <- p + geom_segment(
   data=dat,
   aes(x=xmin, xend=xmax, y=middle, yend=middle), lineend="square", inherit.aes=FALSE, colour="white")
 
-ggsave(file.path(outDir, "duration-plot.png"),width=width, height=height, units="in", dpi=dpi)
+ggsave(file.path(outDir, "duration-plot.jpg"),device="jpeg",width=width, height=height, units="in", dpi=dpi)

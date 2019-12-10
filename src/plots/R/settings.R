@@ -66,6 +66,7 @@ font_add("Cabin-Italic", "../fonts/Cabin/Cabin-Italic.ttf")
 font_add("DejaVuSans", "../fonts/dejavu-fonts-ttf-2.37/ttf/DejaVuSans.ttf")
 showtext_auto()
 
+#theme_set(theme_get() + theme(text=element_text(family="DejaVuSans")))
 
 rad <- function(a) a / 180 * pi
 

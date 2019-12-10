@@ -17,10 +17,11 @@ bx.df$Test = factor(bx.df$Test, levels=c("pre", "post"))
 
 dodge <- position_dodge(0.875)
 
-width <- 3.75
-height <- 3.25
+width <- 3.3333
+height <- 3.5
 
 
+colors$pre = '#999999'
 
 showtext_opts(dpi=DPI)
 fontSize <- 14
@@ -45,9 +46,16 @@ p <- p + scale_y_continuous(
 	labels=seq(0, 100, 25))
 
 p <- p + scale_fill_manual(
-  values=c(pre=colors$pre, post=colors$post))
+    breaks=c("pre", "post"),
+    labels=c("Pre", "Post"),
+    values=c(pre=colors$pre, post=colors$post),
+    name="Test"
+)
 p <- p + scale_color_manual(
-  values=c(pre=colors$pre, post=colors$post))
+    breaks=c("pre", "post"),
+    labels=c("Pre", "Post"),
+    values=c(pre=colors$pre, post=colors$post),
+    name="Test")
 
 dat <- ggplot_build(p)$data[[1]]
 dat <- cbind(
@@ -68,38 +76,35 @@ p <- p + geom_segment(
   inherit.aes=FALSE,
   colour=colors$median)
 
-p <- p + ggtitle('Category discrimination')
 p <- p + theme(
    plot.title = element_text(hjust = 0.5),
 	# Set the default font
-	text=element_text(
-    family="Cabin",
-    size=fontSize),
-	# Set the legend position
-	legend.position="right",
-	# Remove the panel background and grid from the legend
-	legend.key=element_rect(
-	  fill="transparent",
-	  colour="transparent"),
-	# Change the color of the graph background
-	panel.background=element_rect(
-    fill=colors$panel.background),
-	# Make the grid lines dashed
-	panel.grid.major=element_line(
-    color=colors$panel.grid.major,
+	 panel.background = element_blank(),
+  panel.border = element_rect(colour = "#dddddd", fill=NA, size=1),
+        # panel.grid.major = element_blank(),
+        # panel.grid.minor = element_blank(),
+  #panel.background=element_rect(fill="transparent"),#colors$panel.background),
+  panel.grid.major=element_line(
+    color="#dddddd",#colors$panel.grid,
     linetype="13",
     lineend="round"),
-	# Remove tick marks
-	axis.ticks = element_blank(),
-	axis.title.x = element_text(
-    margin=margin(t=5, r=0, b=0, l=0)))
+   text=element_text(family="DejaVuSans", size=fontSize),
+  axis.ticks=element_blank(),
+   axis.text.x = element_text(size=fontSize*0.75),
+    axis.text.y = element_text(size=fontSize*0.75),
+legend.position="bottom",
+legend.margin=margin(t=0,r=0,b=0,l=0),
+  legend.key=element_rect(
+    fill="transparent",
+    colour="transparent"))
 
 
 
 suppressGraphics(ggsave(
   file.path(
     outDir,
-    "oddity-boxplot.png"),
+    "oddity-boxplot.jpg"),
+  device="jpg",
   width=width,
   height=height,
   units="in",

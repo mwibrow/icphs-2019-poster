@@ -15,7 +15,7 @@ color_profiles/
 /data/
 /src/data/
 
-src/plots/images/*.png
+src/plots/images/
 src/images/CALVin-screenshots/jpgs/
 poster.pdf
 *.pdf

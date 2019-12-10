@@ -47,15 +47,19 @@ plots: paths
 	for script in *.R; do echo Executing $$script; Rscript $$script; done
 
 images: paths
-ifeq ($(dpi), 300)
 	@ cd $(screenshots); \
-	echo; echo Scaling and converting images $(dpi); echo `$(underline)`; \
-	mogrify -verbose -format jpg -path jpgs -scale 10% pngs/*.png; \
-else \
-    @ cd $(screenshots); \
 	echo; echo Converting images; echo `$(underline)`; \
-	mogrify -verbose -format jpg -colorspace gray -type Greyscale -path jpgs pngs/*.png
-endif
+	mogrify -verbose -format jpg -path jpgs pngs/*.png;
+
+#ifeq ($(dpi), 300)
+#	@ cd $(screenshots);
+#	echo; echo Scaling and converting images $(dpi); echo `$(underline)`;
+#	mogrify -verbose -format jpg -path jpgs -scale 10% pngs/*.png;
+#else
+    # @ cd $(screenshots); \
+	# echo; echo Converting images; echo `$(underline)`; \
+	# mogrify -verbose -format jpg -colorspace gray -type Greyscale -path jpgs pngs/*.png
+#endif
 
 
 clear-fontcache:
