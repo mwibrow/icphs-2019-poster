@@ -8,8 +8,7 @@ bark <- function(x) {
   return (26.81 * log(1 + x / (x + 1960)) - 0.53)
 }
 lobanov <- function(df, f1="f1", f2="f2", vowel="vowel", group=c(), reduce=TRUE) {
-  df$f1 <- bark(df$f1)
-  df$f2 <- bark(df$f2)
+
   ddply(df, group, function(df.grp) {
     f1.grp <- df.grp[,f1]
     f2.grp <- df.grp[,f2]
@@ -149,7 +148,7 @@ with(transforms, {
     "ʊ" <- 180
     "ɪ" <- 180
     "ɜ:" <- 180
-    "ʌ" <- 0
+    "ʌ" <- list(angle=215, r=.333)
     "æ" <- 210
     "e" <- 180
     "ɔ:" <- 90
@@ -159,13 +158,13 @@ with(transforms, {
     "i:" <- 90
     "æ" <- 180
     "ɪ" <- 0
-    "ɜ:" <- 180
+    "ɜ:" <- list(angle=90, r=0.55)
     "e" <- 90
-    "ɑ:" <- 90
-    "ʌ" <- 0
+    "ɑ:" <- list(angle=90,r=0.2)
+    "ʌ" <- list(angle=255, r=0.4)
     "u:" <- 90
-    "ɒ" <- 240
-      "ɔ:" <- 300
+    "ɒ" <- 0
+      "ɔ:" <- 0
       "ʊ" <- 270
   })
 })
@@ -210,8 +209,8 @@ ssbe.lab.df <- label.transform(
 DPI = 600
 showtext_opts(dpi=DPI)
 fontSize <- 12
-width = 7.25
-height = 3.75
+width <- 3.333
+height = 7.25
 
 colors$ssbe = '#999999'
 # Start plot and set some theme stuff
@@ -228,7 +227,7 @@ p <- ggplot(data=) + theme(
   plot.title = element_text(hjust = 0.5),
   plot.subtitle = element_text(hjust = 0.5),
   axis.ticks=element_blank(),
-  # legend.position=c(0.5,0.046),
+  legend.position="bottom",
   # legend.justification=c(0.5,0),
   legend.key=element_rect(
     fill="white",
@@ -244,8 +243,11 @@ p <- ggplot(data=) + theme(
     size=fontSize*0.875),
   axis.title.y = element_text(
     size=fontSize*0.875),
-  legend.margin=margin(t=2,r=8,b=4,l=2),
-  #legend.box.margin=margin(-4,0,0,0)
+  legend.margin=margin(t=0,r=8,b=4,l=2),
+  legend.box.margin=margin(-2,0,0,0),
+  strip.background = element_blank(),
+  strip.text.x = element_blank(),
+  strip.text.y = element_blank()
   )
 # Reverse scales
 p <- p + scale_y_reverse(
@@ -274,7 +276,7 @@ p <- p + geom_text(
   color=colors$ssbe.label,
   family="DejaVuSans",
   vjust=0.4,
-  size=fontSize*0.3)
+  size=fontSize*0.4)
 
 
 # Draw lines between pre and post
@@ -314,11 +316,17 @@ p <- p + geom_text(
   colour=colors$ipa,
   family="DejaVuSans",
   vjust=0.4,
-  size=fontSize*0.3)
+  size=fontSize*0.4)
+
+groupDf <- data.frame(f1=1.75, f2=-1.625, group=c("LV", "HV"))
+p <- p + geom_label(
+  data=groupDf,
+  aes(x=f2, y=f1, label=group),
+  family="DejaVuSans", label.size=0, fill="#cccccc")
 
 p <- p +  ylab("F1 (Lobanov)")
 p <- p +  xlab("F2 (Lobanov)")
-p <- p + facet_grid(.~group)
+p <- p + facet_grid(rows=vars(group))
 # p <- p + ggtitle('Acoustic analysis',
 #   subtitle="Comparison of monopththong productions with SSBE prototypes")
 options(repr.plot.width=width, repr.plot.height=height)

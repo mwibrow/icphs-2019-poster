@@ -32,8 +32,8 @@ vwl.df$Test = factor(vwl.df$Test, c('pre', 'post', 'SSBE'))
 colors$pre = '#777777'
 colors$ssbe = '#bbbbbb'
 dpi <- 600
-width <- 3.5
-height <- 2.75
+width <- 3.333
+height <- 3
 options(repr.plot.width=width, repr.plot.height=height)
 
 showtext_opts(dpi=dpi)
@@ -54,6 +54,8 @@ p <- ggplot() + theme(
    axis.text.x = element_text(size=fontSize*0.75),
    axis.title.x = element_text(hjust=0.333),
     axis.text.y = element_text(size=fontSize*0.75),
+legend.position="bottom",
+legend.margin=margin(t=0,r=4,b=0,l=2),
   legend.key=element_rect(
     fill="transparent",
     colour="transparent"))

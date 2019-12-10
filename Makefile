@@ -12,7 +12,7 @@ plots=$(input_dir)/plots
 screenshots=$(input_dir)/images/CALVin-screenshots
 TEXINPUTS:=$(input_dir)//:$(TEXINPUTS)
 BIBINPUTS:=$(input_dir)//:$(BIBINPUTS)
-dpi=300
+dpi=600
 title=icphs-2019-poster.pdf
 underline=printf '=%.0s' {1..40}
 
@@ -50,11 +50,11 @@ images: paths
 ifeq ($(dpi), 300)
 	@ cd $(screenshots); \
 	echo; echo Scaling and converting images $(dpi); echo `$(underline)`; \
-	mogrify -verbose -format jpg -path jpgs -scale 10% pngs/*.png;
-else
+	mogrify -verbose -format jpg -path jpgs -scale 10% pngs/*.png; \
+else \
     @ cd $(screenshots); \
 	echo; echo Converting images; echo `$(underline)`; \
-	mogrify -verbose -format jpg -path jpgs pngs/*.png
+	mogrify -verbose -format jpg -colorspace gray -type Greyscale -path jpgs pngs/*.png
 endif
 
 
