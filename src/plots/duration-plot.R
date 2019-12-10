@@ -50,6 +50,8 @@ p <- ggplot() + theme(
     linetype="13",
     lineend="round"),
    text=element_text(family="DejaVuSans", size=fontSize),
+    axis.title.y = element_text(
+    margin=margin(t=0, r=0, b=0, l=0)),
   axis.ticks=element_blank(),
    axis.text.x = element_text(size=fontSize*0.75),
    axis.title.x = element_text(hjust=0.333),

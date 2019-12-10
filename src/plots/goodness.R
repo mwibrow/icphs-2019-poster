@@ -1,14 +1,8 @@
 source(file.path("R", "settings.R"))
 
 
-vid.df = read.csv(file.path(dataDir, "VID.csv"))
+bx.df = read.csv(file.path(dataDir, "VID-R.csv"))
 
-bx.df = ddply(vid.df, c("Group", "Test", "Participant"), function(subset) {
-    nTrials = sum(subset$nTrials)
-    nCorrect = sum(subset$nCorrect)
-    Accuracy = nCorrect / nTrials * 100
-    data.frame("Group"=subset$Group, "Test"=subset$Test, "Accuracy"=Accuracy)
-})
 
 bx.df$Group = factor(bx.df$Group, levels=c("LV", "HV"))
 bx.df$Test = factor(bx.df$Test, levels=c("pre", "post"))
@@ -30,14 +24,14 @@ height <- 3.75
 showtext_opts(dpi=DPI)
 fontSize <- 10
 
-colors$pre = '#999999'
+colors$pre <- '#999999'
 
 p <- ggplot(data=bx.df)
 p <- ggplot(
   bx.df,
   aes(
     x=Group,
-    y=Accuracy,
+    y=Goodness,
     fill=Test,
     color=Test))
 p <- p + geom_boxplot(
@@ -45,11 +39,11 @@ p <- p + geom_boxplot(
     aes(fill=Test, color=Test))
 
 p <- p + scale_y_continuous(
-  expand=c(0, 5),
-  limit=c(0, 100),
+  expand=c(0, 1),
+  limit=c(1,7),
 	minor_breaks=c(),
-	breaks=seq(0, 100, 25),
-	labels=seq(0, 100, 25))
+	breaks=seq(1, 7, 1),
+	labels=seq(1, 7, 1))
 
 # p <- p + scale_fill_manual(
 #   values=c(pre=colors$pre, post=colors$post))
@@ -99,11 +93,11 @@ p <- p + theme(
     linetype="13",
     lineend="round"),
    text=element_text(family="DejaVuSans", size=fontSize),
+    axis.title.y = element_text(
+    margin=margin(t=0, r=0, b=0, l=0)),
   axis.ticks=element_blank(),
    axis.text.x = element_text(size=fontSize*0.75),
     axis.text.y = element_text(size=fontSize*0.75),
-     axis.title.y = element_text(
-    margin=margin(t=0, r=0, b=0, l=0)),
 legend.position="bottom",
 legend.margin=margin(t=0,r=0,b=0,l=0),
   legend.key=element_rect(
@@ -115,7 +109,7 @@ legend.margin=margin(t=0,r=0,b=0,l=0),
 suppressGraphics(ggsave(
   file.path(
     outDir,
-    "Figure8.jpg"),
+    "Figure9.jpg"),
   device="jpeg",
   width=width,
   height=height,

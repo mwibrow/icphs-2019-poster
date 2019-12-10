@@ -1,18 +1,34 @@
 source(file.path("R", "settings.R"))
 
 
-vid.df = read.csv(file.path(dataDir, "VID.csv"))
+pit.df = read.csv(file.path(dataDir, "PIT.csv"))
+pint.df = read.csv(file.path(dataDir, "pint.csv"))
 
-bx.df = ddply(vid.df, c("Group", "Test", "Participant"), function(subset) {
-    nTrials = sum(subset$nTrials)
-    nCorrect = sum(subset$nCorrect)
+pit.df$Task = 'Picture identification'
+pint.df$Task = 'Picture naming'
+
+bx1.df = ddply(pit.df, c("Task", "group", "participant"), function(subset) {
+    nTrials = nrow(subset)
+    nCorrect = sum(subset$correct)
     Accuracy = nCorrect / nTrials * 100
-    data.frame("Group"=subset$Group, "Test"=subset$Test, "Accuracy"=Accuracy)
+    data.frame(
+        "Task"=subset$Task[1],
+        "Group"=subset$group[1], "Participant"=subset$participant[1], "Accuracy"=Accuracy)
 })
 
-bx.df$Group = factor(bx.df$Group, levels=c("LV", "HV"))
-bx.df$Test = factor(bx.df$Test, levels=c("pre", "post"))
+bx2.df = ddply(pint.df, c("Task", "group", "participant"), function(subset) {
+    nTrials = nrow(subset)
+    nCorrect = sum(subset$correct)
+    Accuracy = nCorrect / nTrials * 100
+    data.frame(
+        "Task"=subset$Task[1],
+        "Group"=subset$group[1], "Participant"=subset$participant[1], "Accuracy"=Accuracy)
+})
 
+bx.df <- rbind(bx1.df, bx2.df)
+
+bx.df$Group = factor(bx.df$Group, levels=c("LV", "HV"))
+bx.df$Task = factor(bx.df$Task, levels=c("Picture identification", "Picture naming"))
 POST <- "#F8BBD0"
 PRE <- "#E91E63"
 MD <- "#FCE4EC"
@@ -23,7 +39,7 @@ colors$pre = '#777777'
 dodge <- position_dodge(0.875)
 
 width <- 3.33
-height <- 3.75
+height <- 3.5
 
 
 
@@ -38,11 +54,10 @@ p <- ggplot(
   aes(
     x=Group,
     y=Accuracy,
-    fill=Test,
-    color=Test))
+    color=Group,
+    fill=Group))
 p <- p + geom_boxplot(
-    position=dodge,
-    aes(fill=Test, color=Test))
+    position=dodge)
 
 p <- p + scale_y_continuous(
   expand=c(0, 5),
@@ -51,30 +66,30 @@ p <- p + scale_y_continuous(
 	breaks=seq(0, 100, 25),
 	labels=seq(0, 100, 25))
 
-# p <- p + scale_fill_manual(
-#   values=c(pre=colors$pre, post=colors$post))
-# p <- p + scale_color_manual(
-#   values=c(pre=colors$pre, post=colors$post))
 
 p <- p + scale_fill_manual(
-    breaks=c("pre", "post"),
-    labels=c("Pre", "Post"),
-    values=c(pre=colors$pre, post=colors$post),
-    name="Test"
+    breaks=c("LV", "HV"),
+    labels=c("LV", "HV"),
+    values=c(LV=colors$post, HV=colors$post),
+    name="Group"
 )
 p <- p + scale_color_manual(
-    breaks=c("pre", "post"),
-    labels=c("Pre", "Post"),
-    values=c(pre=colors$pre, post=colors$post),
-    name="Test")
+    breaks=c("LV", "HV"),
+    labels=c("LV", "HV"),
+    values=c(LV=colors$post, HV=colors$post),
+    name="Group"
+)
+p <- p + facet_wrap(vars(Task), nrow=1,ncol=2,strip.position="top")
 
 dat <- ggplot_build(p)$data[[1]]
+
 dat <- cbind(
 	with(
     bx.df,
     expand.grid(
-      Test=levels(Test),
-      Group=levels(Group))),
+    Group=levels(Group),
+      Task=levels(Task)
+      )),
 	dat)
 p <- p + geom_segment(
   data=dat,
@@ -86,6 +101,9 @@ p <- p + geom_segment(
   lineend="square",
   inherit.aes=FALSE,
   colour=colors$median)
+
+
+
 
 p <- p + theme(
   plot.title = element_text(hjust = 0.5),
@@ -99,12 +117,12 @@ p <- p + theme(
     linetype="13",
     lineend="round"),
    text=element_text(family="DejaVuSans", size=fontSize),
+   axis.title.y = element_text(
+    margin=margin(t=0, r=0, b=0, l=0)),
   axis.ticks=element_blank(),
    axis.text.x = element_text(size=fontSize*0.75),
     axis.text.y = element_text(size=fontSize*0.75),
-     axis.title.y = element_text(
-    margin=margin(t=0, r=0, b=0, l=0)),
-legend.position="bottom",
+legend.position="none",
 legend.margin=margin(t=0,r=0,b=0,l=0),
   legend.key=element_rect(
     fill="transparent",
@@ -115,7 +133,7 @@ legend.margin=margin(t=0,r=0,b=0,l=0),
 suppressGraphics(ggsave(
   file.path(
     outDir,
-    "Figure8.jpg"),
+    "Figure10.jpg"),
   device="jpeg",
   width=width,
   height=height,

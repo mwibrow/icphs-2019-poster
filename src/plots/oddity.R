@@ -24,7 +24,7 @@ height <- 3.5
 colors$pre = '#999999'
 
 showtext_opts(dpi=DPI)
-fontSize <- 14
+fontSize <- 10
 
 p <- ggplot(data=bx.df)
 p <- ggplot(
