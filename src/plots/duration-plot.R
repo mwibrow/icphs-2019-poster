@@ -98,4 +98,4 @@ p <- p + geom_segment(
   data=dat,
   aes(x=xmin, xend=xmax, y=middle, yend=middle), lineend="square", inherit.aes=FALSE, colour="white")
 
-ggsave(file.path(outDir, "duration-plot.jpg"),device="jpeg",width=width, height=height, units="in", dpi=dpi)
+ggsave(file.path(outDir, "Figure7.jpg"),device="jpeg",width=width, height=height, units="in", dpi=dpi)

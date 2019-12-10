@@ -113,7 +113,7 @@ legend.margin=margin(t=0,r=0,b=0,l=0),
 suppressGraphics(ggsave(
   file.path(
     outDir,
-    "vid-boxplot.jpg"),
+    "Figure8.jpg"),
   device="jpeg",
   width=width,
   height=height,

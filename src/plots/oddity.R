@@ -103,7 +103,7 @@ legend.margin=margin(t=0,r=0,b=0,l=0),
 suppressGraphics(ggsave(
   file.path(
     outDir,
-    "oddity-boxplot.jpg"),
+    "Figure5.jpg"),
   device="jpg",
   width=width,
   height=height,

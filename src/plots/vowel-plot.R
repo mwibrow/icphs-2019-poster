@@ -331,4 +331,4 @@ p <- p + facet_wrap(vars(group), nrow=2,ncol=1,strip.position="top")
 #   subtitle="Comparison of monopththong productions with SSBE prototypes")
 options(repr.plot.width=width, repr.plot.height=height)
 suppressGraphics(
-  ggsave(file.path(outDir, "vowel-plot.jpg"), device="jpeg", width=width, height=height, units="in", dpi=DPI))
+  ggsave(file.path(outDir, "Figure6.jpg"), device="jpeg", width=width, height=height, units="in", dpi=DPI))
